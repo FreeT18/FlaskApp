@@ -1,56 +1,63 @@
 import random
+import numpy as np
+import pickle
 import json
+import nltk
+from keras.models import load_model
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 
-import torch
+model = load_model("data/model.h5")
+intents = json.loads(open("data/intents.json").read())
+words = pickle.load(open("data/texts.pkl", "rb"))
+classes = pickle.load(open("data/labels.pkl", "rb"))
 
-from model import NeuralNet
-from nltk_utils import bag_of_words, tokenize
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-with open('intents.json', 'r') as json_data:
+with open('data/intents.json', 'r') as json_data:
     intents = json.load(json_data)
 
-FILE = "data.pth"
-data = torch.load(FILE)
+FILE = "data/data.pth"
 
 intents = None
 tags = None
 model = None
 all_words = None
 
-input_size = data["input_size"]
-hidden_size = data["hidden_size"]
-output_size = data["output_size"]
-all_words = data['all_words']
-tags = data['tags']
-model_state = data["model_state"]
-
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
-model.load_state_dict(model_state)
-model.eval()
-
 bot_name = "Ada"
 
-def get_response(msg):
-    sentences = tokenize(msg)
-    X = bag_of_words(sentences, all_words)
-    X = X.reshape(1, X.shape[0])
-    X = torch.from_numpy(X).to(device)
+def clean_up(sentence):
+    sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [lemmatizer.lemmatize(word) for w in sentence_words]
+    return sentence_words
 
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
+def bag_of_words(sentence):
+    sentence_words = clean_up(sentence)
+    bag = [0] * len(words)
+    for w in sentence_words:
+        for i, word in enumerate(words):
+            if word == w:
+                bag[i] = 1
+    return np.array(bag)
 
-    tag = tags[predicted.item()]
+def predict_class(sentence):
+    bow = bag_of_words(sentence)
+    result = model.predict(np.array([bow]))[0]
+    ERROR_THRESHOLD = 0.25
+    results = [[i, r] for i, r in enumerate(result) if r > ERROR_THRESHOLD]
+    
+    results.sort(key=lambda x: x[1], reverse=True)
+    return_list = []
+    for r in results:
+        return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
+    return return_list
 
-    probs = torch.softmax(output, dim=1)
-    prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
-        for intent in intents['intents']:
-            if tag == intent["tag"]:
-                return random.choice(intent['responses'])
-
-    return "I do not understand..."
+def get_response(intents_list, intents_json):
+    tag = intents_list[0]['intent']
+    list_of_intents = intents_json['intents']
+    for i in list_of_intents:
+        if i['tag'] == tag:
+            result = random.choice(i['responses'])
+            break
+    return result
 
 
 """ def initialize(data_path, intents_path):
@@ -72,9 +79,9 @@ if __name__ == "__main__":
     print("Let's chat! (type 'quit' to exit)")
     initialize()
     while True:
-        sentence = input("You: ")
-        if sentence == "quit":
+        message = input("You: ")
+        if message == "quit":
             break
-
-        resp = get_response(sentence)
-        print(resp)
+        ints = predict_class(message)
+        result = get_response(ints, intents)
+        print(result)
