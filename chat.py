@@ -77,7 +77,7 @@ def get_response(intents_list, intents_json):
 
 if __name__ == "__main__":
     print("Let's chat! (type 'quit' to exit)")
-    initialize()
+    #initialize()
     while True:
         message = input("You: ")
         if message == "quit":
