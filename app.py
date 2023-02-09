@@ -14,11 +14,11 @@ app = Flask(__name__)
 
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('intents.json').read())
+intents = json.loads(open('data/intents.json').read())
 
-words = pickle.load(open('texts.pkl', 'rb'))
-classes = pickle.load(open('labels.pkl', 'rb'))
-model = load_model('model.h5')
+words = pickle.load(open('data/texts.pkl', 'rb'))
+classes = pickle.load(open('data/labels.pkl', 'rb'))
+model = load_model('data/model.h5')
 
 def clean_up(sentence):
     sentence_words = word_tokenize(sentence)
@@ -58,17 +58,6 @@ def get_response(intents_list, intents_json):
 @app.route("/home")
 def home():
     return render_template("index.html")
-
-
-@app.post("/predict")
-def predict():
-    INTENTS_PATH = url_for('static', filename='data/intents.json')
-    DATA_PATH = url_for('static', filename='data/data.pth')
-    initialize(DATA_PATH, INTENTS_PATH)
-    text = request.get_json().get("message")
-    response = get_response(text)
-    message = {"answer": response}
-    return jsonify(message)
 
 @app.route('/predict', methods=['POST'])
 def predict():
