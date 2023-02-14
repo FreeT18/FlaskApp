@@ -12,7 +12,6 @@ from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('data/intents.json').read())
 

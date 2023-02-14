@@ -4,7 +4,7 @@
           <!--- Metas -->
         <meta charset="utf-8" http-equiv="content-type"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
         <!---Title--->
         <title>{% block title %}Ransomware{% endblock %}</title>
     </head>
@@ -13,8 +13,7 @@
 <!--- Header Section-->
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
-            <!-- <a href="{{ url_for('about') }}" class="navbar-item">About</a>
-            <a href="{{ url_for('contact') }}" class="navbar-item">Contact</a> -->
+
         </div>
 
 <!--- Content Section-->
