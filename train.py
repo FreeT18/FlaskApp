@@ -10,7 +10,6 @@ from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 import random
 
-
 #os.chdir("./Downloads")
 
 words=[]
@@ -23,8 +22,6 @@ intents = json.loads(data_file)
 import re
 import tensorflow as tf
 import random
-
-
 
 with open(r'Intents.json') as f:
     intents = json.load(f)
@@ -62,12 +59,9 @@ classes = sorted(list(set(classes)))
 # documents = combination between patterns and intents
 print (len(documents), "documents")
 
-
-
 # classes = intents
 print (len(classes), "classes", classes)
 # words = all words, vocabulary
-
 
 #Save into pickle files
 print (len(words), "unique lemmatized words", words)

@@ -66,13 +66,11 @@ def predict():
     response = get_response(intents_list, intents)
     return response
 
-
 """ @app.route('/chatbot', methods=['POST'])
 def chatbot_response():
     user_input = request.form.get('text')
     response = chatbot.get_response(user_input)
     return str(response) """
-
 
 if __name__ == "__main__":
     app.run(debug=True)

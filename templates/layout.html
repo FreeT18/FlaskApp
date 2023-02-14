@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <!--- Metas -->
+        <meta charset="utf-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}">
+        <!---Title--->
+        <title>{% block title %}Ransomware{% endblock %}</title>
+    </head>
+
+<body>
+<!--- Header Section-->
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <!-- <a href="{{ url_for('about') }}" class="navbar-item">About</a>
+            <a href="{{ url_for('contact') }}" class="navbar-item">Contact</a> -->
+        </div>
+
+<!--- Content Section-->
+        {% block content %}
+        <div class="body-content">
+            
+<div class="row">
+    <div class="col-md-10 mr-auto ml-auto">
+        <h1>ChatBot</h1>
+        <form>
+            <div id="chatbox">
+                <div class="col-md-8 ml-auto mr-auto">
+                <p class="botText"><span>Ask me anything.</span></p>
+                </div>
+            </div>
+            <div id="userInput" class="row">
+                <div class="col-md-10">
+                <input id="text" type="text" name="msg" placeholder="Message" class="form-control">
+                <button type="submit" id="send" class="btn">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+
+<!-- FOOTER SECTION -->
+{% include 'footer.html' %}
+
+<!--- Scripts -->
+<script>
+    $(document).ready(function() {
+        $("form").on("submit", function(event) {
+            var rawText = $("#text").val();
+            var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+            $("#text").val("");
+            $("#chatbox").append(userHtml);
+            document.getElementById("userInput").scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+            });
+            $.ajax({
+                data: {
+                    msg: rawText,
+                },
+                type: "POST",
+                url: "/get",
+            }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                $("#chatbox").append($.parseHTML(botHtml));
+                document.getElementById("userInput").scrollIntoView({
+                    block: "start",
+                    behavior: "smooth",
+                });
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</body>
+</html>
