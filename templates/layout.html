@@ -13,32 +13,52 @@
 <!--- Header Section-->
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
-
         </div>
+        <div id="main">
+            <div id="header">
+              <div id="logo">
+                <div id="logo_text">
+                  <!-- class="logo_colour", allows you to change the colour of the text -->
+                  <h1><a href="index.html">Ransomware<span class="logo_colour"></span></a></h1>
+                  <h2>Ransomware market</h2>
+                </div>
+              
+               
+              </div>
+              <div id="menubar">
+                <ul id="menu">
+                  <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+                  <li class="selected"><a href="index.html">Home</a></li>
+                 <!--<li><a href="examples.html">Examples</a></li>
+                  <li><a href="page.html">A Page</a></li>
+                  <li><a href="another_page.html">Another Page</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>- -->
+                </ul>
+              </div>
+            </div>
 
 <!--- Content Section-->
         {% block content %}
         <div class="body-content">
-            
-<div class="row">
-    <div class="col-md-10 mr-auto ml-auto">
-        <h1>ChatBot</h1>
-        <form>
-            <div id="chatbox">
-                <div class="col-md-8 ml-auto mr-auto">
-                <p class="botText"><span>Ask me anything.</span></p>
+            <div class="row">
+                <div class="col-md-10 mr-auto ml-auto">
+                    <h1>ChatBot</h1>
+                    <form>
+                        <div id="chatbox">
+                            <div class="col-md-8 ml-auto mr-auto">
+                            <p class="botText"><span>Ask me anything.</span></p>
+                            </div>
+                        </div>
+                        <div id="userInput" class="row">
+                          <form action="/chatbot" method="post">
+                            <input type="text" name="message">
+                            <input type="submit" value="Send">
+                        </form>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div id="userInput" class="row">
-                <div class="col-md-10">
-                <input id="text" type="text" name="msg" placeholder="Message" class="form-control">
-                <button type="submit" id="send" class="btn">Send</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
+              </div>
+        </div>
 {% endblock %}
 
 

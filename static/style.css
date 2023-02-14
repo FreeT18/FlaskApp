@@ -90,7 +90,7 @@ ol li
 { width: 898px;
   position: relative;
   height: 148px;
-  border-bottom: 2px solid #FFF;}
+  border-bottom: 2px solid #060a52;}
 
 #logo #logo_text 
 { position: absolute; 
@@ -199,10 +199,10 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   footer {
     background-color: #314584;
     width: 100%;
-    min-height: 400px;
+    min-height: 100px;
     text-align: center;
-    padding: 70px 0px 0px 0px;
-    margin-top: 100px;
+    padding: 50px 0px 0px 0px;
+    margin-top: 50px;
 }
 
 footer h5 {
