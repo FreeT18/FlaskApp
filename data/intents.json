@@ -38,7 +38,7 @@
     "responses": ["Are you looking for ransomware?"]
     },
     {"tag": "market",
-    "patterns": ["I am", "What ransomware do you have?"],
+    "patterns": ["I am","yes","What ransomware do you have?"],
     "responses": ["There are options for large or small companies. Which do you prefer?."]
     },
     {"tag": "target",

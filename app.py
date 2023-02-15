@@ -11,8 +11,6 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
-app = Flask(__name__)
-
 #functions
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('data/intents.json').read())
@@ -20,9 +18,12 @@ words = pickle.load(open('data/texts.pkl', 'rb'))
 classes = pickle.load(open('data/labels.pkl', 'rb'))
 model = load_model('data/model.h5')
 
+app = Flask(__name__)
+#run_with_ngrok(app)
+
 def clean_up(sentence):
     sentence_words = word_tokenize(sentence)
-    sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
+    sentence_words = [lemmatizer.lemmatize(word.lower()) for word in sentence_words]
     return sentence_words
 
 def bag_of_words(sentence, words, show_details=True):
@@ -47,14 +48,20 @@ def predict_class(sentence, model):
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
     return return_list
 
-def get_response(intents_list, intents_json):
-    tag = intents_list[0]['intent']
+def get_response(ints, intents_json):
+    tag = ints[0]['intent']
     list_of_intents = intents_json['intents']
     for intent in list_of_intents:
         if intent['tag'] == tag:
             response = random.choice(intent['responses'])
             break
     return response
+
+def log_chat(message, response):
+    log_file = open("chat_logs.txt", "a")
+    log_file.write("User: " + message + "\n")
+    log_file.write("Bot: " + response + "\n\n")
+    log_file.close()
 
 #define routes
 @app.route("/")
@@ -86,6 +93,7 @@ def predict():
     message = request.form['message']
     intents_list = predict_class(message)
     response = get_response(intents_list, intents)
+    log_chat(message, response)
     return response
 
 """ @app.route('/chatbot', methods=['POST'])
