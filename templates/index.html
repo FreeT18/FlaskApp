@@ -3,18 +3,15 @@
 Darknet Home
 {% endblock %}
 {% block content %}
-<div id="site_content">
-  <div class="body-content">    
-    <div class="row">
-    </div>
+<div id="py-5">
+  <div class="containter my-5">    
+    <div class="row justify-content-center">
           <div class="sidebar">
             <!-- insert your sidebar items here -->
             <h3>Latest News</h3>
             <h4>New Website Launched</h4>
-            <h5>2023</h5>
             <p>2023 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
             <p></p>
-           
             <ul>
               <li><a href="#">link 1</a></li>
               <li><a href="#">link 2</a></li>
@@ -31,17 +28,18 @@ Darknet Home
           </div>
           <div id="content">
             <!-- insert the page content here -->
-    <img src="./static/images/p1.jpg" alt="Hive" width="200px">
-    <p>Hive - $75</p>
+    <h1>Hive - $75</h1>
+    <p>Presenting multiple options, we are gathering information to better represent and learn about our population.</p>
             <ul>
-              <li>Input things</li>
-              <li>Input things</li>
-              <li>Input things</li>
+              <li>Section 1</li>
+              <li>Product information</li>
+              <li>information Systems and various data sources are included. Please leave feedback about your search
+                and needs.</li>
             </ul>
           </div>
         </div>
       </div>
-    <div class="col-md-10 mr-auto ml-auto">
+    <div class="container">
      <h1>Need Help?</h1>
       <form>
         <div id="chatbox">
@@ -51,8 +49,11 @@ Darknet Home
         </div>
         <div id="userInput" class="row">
           <div class="col-md-10">
-            <input id="text" type="text" name="msg" placeholder="Message" class="form-control">
-            <button type="submit" id="send" class="btn btn-warning">Send</button>
+            <div id="chatlog"></div>
+            <input id="text" type="text" name="msg" placeholder="Type your message here..." class="form-control">
+            <button type="submit" id="send" class="btn btn-warning">
+            Send</button>
+            </div>
           </div>
         </div>
       </form>
@@ -89,4 +90,22 @@ Darknet Home
       });
   });
 </script>
+<script>
+  $('#submit').click(function() {
+      $.ajax({
+          type: 'POST',
+          url: '/save_logs',
+          data: JSON.stringify({'log': 'log message goes here'}),
+          contentType: 'application/json',
+          success: function(response) {
+              console.log(response);
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      });
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 {% endblock %}

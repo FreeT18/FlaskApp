@@ -5,6 +5,10 @@
         <meta charset="utf-8" http-equiv="content-type"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!--- Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!---Title--->
@@ -13,31 +17,29 @@
 
 <body>
 <!--- Header Section-->
-        <div id="main">
-            <div id="header">
-              <div id="logo">
-                <div id="logo_text">
-                  <!-- class="logo_colour", allows you to change the colour of the text -->
-                  <h1><a href="{{ url_for('home') }}">Ransomware<span class="logo_colour"></span></a></h1>
-                  <h2>Ransomware market</h2>
-                </div>
-              
-               
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
+              <a class="navbar-brand" href="#!">Ransomware Home</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                      <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                  </ul>
               </div>
-              <div id="menubar">
-                <ul id="menu">
-                  <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-                  <li class="selected"><a href="{{ url_for('home') }}">Home</a></li>
-                 <!--<li><a href="examples.html">Examples</a></li>
-                  <li><a href="page.html">A Page</a></li>
-                  <li><a href="another_page.html">Another Page</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>- -->
-                </ul>
-              </div>
-            </div>
-
+          </div>
+      </nav>
+      <!-- Header - set the background image for the header in the line below-->
+      <header class="py-1">
+          <div class="text-center my-5">
+              <img class="img-fluid rounded-circle mb-4" src="./static/images/p1.jpg" alt="Hive" width="200px" />
+              <h1 class="text-white fs-3 fw-bolder">Welcome</h1>
+          </div>
+      </header>
 <!--- Content Section-->
-        {% block content %}
+{% block content %}
    
 {% endblock %}
 

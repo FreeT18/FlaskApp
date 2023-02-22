@@ -10,7 +10,12 @@ from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 import random
 
+import os
 #os.chdir("./Downloads")
+
+nltk.download('omw-1.4')
+nltk.download("punkt")
+nltk.download("wordnet")
 
 words=[]
 classes = []
@@ -23,7 +28,7 @@ import re
 import tensorflow as tf
 import random
 
-with open(r'Intents.json') as f:
+with open(r'data/intents.json') as f:
     intents = json.load(f)
 
 
@@ -65,8 +70,8 @@ print (len(classes), "classes", classes)
 
 #Save into pickle files
 print (len(words), "unique lemmatized words", words)
-pickle.dump(words,open('texts.pkl','wb'))
-pickle.dump(classes,open('labels.pkl','wb'))
+pickle.dump(words,open('data/texts.pkl','wb'))
+pickle.dump(classes,open('data/labels.pkl','wb'))
 # create our training data
 training = []
 # create an empty array for our output
@@ -117,5 +122,5 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 
 #fitting and saving the model 
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=120, batch_size=5, verbose=1)
-model.save('model.h5', hist)
+model.save('data/model.h5', hist)
 print("model created")

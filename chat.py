@@ -13,7 +13,7 @@ nltk.download("punkt")
 nltk.download("wordnet")
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('intents.json').read())
+intents = json.loads(open('data/intents.json', 'r').read())
 
 words = pickle.load(open('data/texts.pkl','rb'))
 classes = pickle.load(open('data/labels.pkl','rb'))
@@ -44,8 +44,8 @@ def predict_class(sentence):
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
     return return_list
 
-def get_response(ints, intents_json):
-    tag = ints[0]['intent']
+def get_response(intents_list, intents_json):
+    tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
     for intent in list_of_intents:
         if intent['tag'] == tag:
@@ -54,16 +54,14 @@ def get_response(ints, intents_json):
     return response
 
 def log_chat(user_input, bot_response):
-    log_file = open("chat_logs.txt", "a")
+    log_file = open("data/chat_logs.txt", "a")
     log_file.write("User: " + user_input + "\n")
     log_file.write("Bot: " + bot_response + "\n\n")
     log_file.close()
 
 
 while True:
-    message = input("Enter your message(enter 'q' to quit): ")
-    if message == 'q':
-        break
+    message = input("Enter your message: ")
     intents_list = predict_class(message)
     response = get_response(intents_list, intents)
     log_chat(message, response)
@@ -79,13 +77,4 @@ def store_log(message, response):
     c.execute("CREATE TABLE IF NOT EXISTS logs(message text, response text)")
     c.execute("INSERT INTO logs(message, response) VALUES (?,?)", (message, response))
     conn.commit()
-    conn.close()
-
-while True:
-    message = input("Enter your message(enter 'q' to quit): ")
-    if message == 'q':
-        break
-    intents_list = predict_class(message)
-    response = get_response(intents_list, intents)
-    print("Response:", response)
-    store_log(message, response) """
+    conn.close()"""
