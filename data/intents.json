@@ -42,12 +42,12 @@
     "responses": ["There are options for large or small companies. Which do you prefer?."]
     },
     {"tag": "target",
-    "patterns": ["I am targeting large companies.", "I am targeting companies"],
-    "responses": ["Our premium selection is your best option."]
+    "patterns": ["I am targeting large companies.", "I am targeting companies", "Large companies", "large"],
+    "responses": ["Our Lockdown selection is your best option."]
     },
     {"tag": "target2",
-    "patterns": ["I am targeting individuals.", "I am targeting small companies"],
-    "responses": ["Our premium selection is your best option."]
+    "patterns": ["I am targeting individuals.", "I am targeting small companies", "small", "individuals"],
+    "responses": ["Our Hive selection is your best option."]
     }
 ]
 }

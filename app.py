@@ -12,27 +12,26 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
-DATABASE = '/data/logs.db'
+DATABASE = './data/logs.db'
 
 app = Flask(__name__)
 #run_with_ngrok(app)
 
 #Initialize the database
-conn = sqlite3.connect('data/logs.db')
+conn = sqlite3.connect(DATABASE, check_same_thread=False)
 
 #Create the database model
-""" class ChatLogs(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    text = db.Column(db.String(1000), nullable=False)
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+try:
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE chatbot_log
+                  (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   msg TEXT,
+                   response TEXT,
+                   timestamp DATETIME)''')
+    conn.commit()
+except:
+    cursor = conn.cursor()
 
-class Response(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    text = db.Column(db.String(1000), nullable=False)
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
- """
 
 #Define functions
 lemmatizer = WordNetLemmatizer()
@@ -77,12 +76,6 @@ def get_response(ints, intents_json):
             break
     return response
 
-def log_chat(message, response):
-   with open('data/chat_logs.txt', 'a') as file:
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        file.write(f"{timestamp} - User: {message}\n")
-        file.write(f"{timestamp} - Bot: {response}\n\n")
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -107,13 +100,6 @@ def close_connection(exception):
 def home():
     return render_template("index.html")
 
-@app.route("/", methods=["POST"])
-def chatlog():
-    message = request.form['message']
-    response = request.form['response']
-    connection = sqlite3.connect(currentdirectory="\ChatLogs.db")
-    cursor = connection.cursor()
-
 @app.route("/get", methods=["POST"])
 def chatbot_response():
     msg = request.form["msg"]
@@ -121,39 +107,21 @@ def chatbot_response():
         name = msg[11:]
         ints = predict_class(msg, model)
         res1 = get_response(ints, intents)
-        res =res1.replace("{n}",name)
+        response =res1.replace("{n}",name)
     elif msg.startswith('hi my name is'):
         name = msg[14:]
         ints = predict_class(msg, model)
         res1 = get_response(ints, intents)
-        res =res1.replace("{n}",name)
+        response =res1.replace("{n}",name)
     else:
         ints = predict_class(msg, model)
-        res = get_response(ints, intents)
-    return res
-
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    message = request.form['message']
-    intents_list = predict_class(message)
-    response = get_response(intents_list, intents)
-    log_chat(message, response)
+        response = get_response(ints, intents)
+    # Insert the user message and bot response to the chat log table
+    timestamp = datetime.now()
+    cursor.execute("INSERT INTO chatbot_log (msg, response, timestamp) VALUES (?, ?, ?)",
+                   (msg, response, timestamp))
+    conn.commit()
     return response
-
-@app.route('/save_logs', methods=['POST'])
-def save_logs():
-    data = request.get_json()
-    with open('data/logs.txt', 'a') as f:
-        f.write(data['log'] + '\n')
-    return jsonify({'success': True})
-
-""" @app.route('/chatbot', methods=['POST'])
-def chatbot():
-    message = request.form['message']
-    response = get_chatbot_response(message)
-    return response """
-
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -23,7 +23,7 @@ Darknet Home
           <div class="row margin-b-40">
               <div class="col-sm-6">
                   <h2>Latest Products</h2>
-                  <p>Discover the latest evolutions and prepare.</p>
+                  <p>Discover the latest evolution and prepare.</p>
               </div>
           </div>
           <!--// end row -->
@@ -257,7 +257,7 @@ Darknet Home
           $("#chatbox").append(userHtml);
           document.getElementById("userInput").scrollIntoView({
               block: "start",
-              behavior: "smooth",
+              behavior: "smoothscroll",
           });
           $.ajax({
               data: {
@@ -270,29 +270,14 @@ Darknet Home
               $("#chatbox").append($.parseHTML(botHtml));
               document.getElementById("userInput").scrollIntoView({
                   block: "start",
-                  behavior: "smooth",
+                  behavior: "smoothscroll",
               });
           });
           event.preventDefault();
       });
   });
 </script>
-<script>
-  $('#submit').click(function() {
-      $.ajax({
-          type: 'POST',
-          url: '/save_logs',
-          data: JSON.stringify({'log': 'log message goes here'}),
-          contentType: 'application/json',
-          success: function(response) {
-              console.log(response);
-          },
-          error: function(error) {
-              console.log(error);
-          }
-      });
-  });
-</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 {% endblock %}
