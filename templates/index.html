@@ -257,7 +257,7 @@ Darknet Home
           $("#chatbox").append(userHtml);
           document.getElementById("userInput").scrollIntoView({
               block: "start",
-              behavior: "smoothscroll",
+              behavior: "smooth",
           });
           $.ajax({
               data: {
@@ -270,7 +270,7 @@ Darknet Home
               $("#chatbox").append($.parseHTML(botHtml));
               document.getElementById("userInput").scrollIntoView({
                   block: "start",
-                  behavior: "smoothscroll",
+                  behavior: "smooth",
               });
           });
           event.preventDefault();

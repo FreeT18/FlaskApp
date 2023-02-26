@@ -123,5 +123,14 @@ def chatbot_response():
     conn.commit()
     return response
 
+@app.route("/database")
+def get_chatbot_interactions():
+    # Execute a SELECT statement to retrieve chatbot interactions from the database
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM chatbot_interactions")
+    rows = cursor.fetchall()
+
+    return render_template("chatbot_interactions.html", rows=rows)
+
 if __name__ == "__main__":
     app.run(debug=True)
