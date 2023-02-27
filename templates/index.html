@@ -225,7 +225,7 @@ Darknet Home
 
 <!---Chatbot-->
 <div class="content-lg container">
-    <h1 align="center">Need Help?</h1>
+    <h1 class="header">Need Help?</h1>
       <form>
         <div id="chatbox">
           <div class="col-md-8 ml-auto mr-auto">
@@ -234,7 +234,6 @@ Darknet Home
         </div>
         <div id="userInput" class="row">
           <div class="col-md-10">
-            <div id="chatlog"></div>
             <input id="text" type="text" name="msg" placeholder="Type your message here..." class="form-control">
             <button type="submit" id="send" class="btn btn-warning">
             Send</button>
@@ -244,7 +243,9 @@ Darknet Home
       </form>
 </div>
 
-<table>
+<div class ="content-lg container">
+    <button id="chatlog" onclick="getrows()">Get Rows</button>
+<table class="table-bordered">
     <thead>
         <tr>
             <th>ID</th>
@@ -264,6 +265,7 @@ Darknet Home
         {% endfor %}
     </tbody>
 </table>
+</div>
 <!---End Chatbot-->
 
 <!--========== END PAGE LAYOUT ==========-->
@@ -298,7 +300,26 @@ Darknet Home
       });
   });
 </script>
-
+<script>
+function getRows() {
+        fetch('/get_rows')
+            .then(response => response.json())
+            .then(rows => {
+                let tbody = document.querySelector('#rows-table tbody');
+                tbody.innerHTML = '';
+                rows.forEach(row => {
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+    }
+</script>    
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 {% endblock %}

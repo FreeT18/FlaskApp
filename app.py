@@ -32,6 +32,7 @@ try:
 except:
     cursor = conn.cursor()
 
+rows = cursor.fetchall()
 
 #Define functions
 lemmatizer = WordNetLemmatizer()
@@ -122,6 +123,13 @@ def chatbot_response():
                    (msg, response, timestamp))
     conn.commit()
     return response
+
+@app.route("/get_rows")
+def get_rows():
+    query = "SELECT * from chatbot_log where id >= 10"
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    return jsonify(rows)
 
 if __name__ == "__main__":
     app.run(debug=True)

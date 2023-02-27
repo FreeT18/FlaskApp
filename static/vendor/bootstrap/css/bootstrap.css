@@ -179,14 +179,7 @@ textarea {
 optgroup {
   font-weight: bold;
 }
-table {
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-td,
-th {
-  padding: 0;
-}
+
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   *,
@@ -2258,13 +2251,12 @@ caption {
   color: #777;
   text-align: left;
 }
-th {
-  text-align: left;
-}
+
 .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  box-shadow: inset;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,

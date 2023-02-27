@@ -150,6 +150,16 @@ h4 {
   text-decoration: none;
 }
 
+table {
+  display: flexbox;
+  border: 1px, #495057;
+  width: fit-content;
+}
+
+td, tr {
+  padding: 2px;
+  align-content: center;
+}
 /*------------------------------------------------------------------
   	[Blockquote]
 ------------------------------------------------------------------*/
@@ -1261,7 +1271,6 @@ fieldset[disabled] .btn-theme {
 
 .container-full-width:before, .container-full-width:after {
   content: " ";
-  display: table;
 }
 
 .container-full-width:after {
