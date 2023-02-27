@@ -243,6 +243,27 @@ Darknet Home
         </div>
       </form>
 </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User Message</th>
+            <th>Chatbot Response</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <!---End Chatbot-->
 
 <!--========== END PAGE LAYOUT ==========-->
@@ -257,7 +278,7 @@ Darknet Home
           $("#chatbox").append(userHtml);
           document.getElementById("userInput").scrollIntoView({
               block: "start",
-              behavior: "smooth",
+              behavior: "auto",
           });
           $.ajax({
               data: {
@@ -270,7 +291,7 @@ Darknet Home
               $("#chatbox").append($.parseHTML(botHtml));
               document.getElementById("userInput").scrollIntoView({
                   block: "start",
-                  behavior: "smooth",
+                  behavior: "auto",
               });
           });
           event.preventDefault();

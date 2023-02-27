@@ -98,7 +98,7 @@ def close_connection(exception):
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", rows=rows)
 
 @app.route("/get", methods=["POST"])
 def chatbot_response():
@@ -122,15 +122,6 @@ def chatbot_response():
                    (msg, response, timestamp))
     conn.commit()
     return response
-
-@app.route("/database")
-def get_chatbot_interactions():
-    # Execute a SELECT statement to retrieve chatbot interactions from the database
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM chatbot_interactions")
-    rows = cursor.fetchall()
-
-    return render_template("chatbot_interactions.html", rows=rows)
 
 if __name__ == "__main__":
     app.run(debug=True)
