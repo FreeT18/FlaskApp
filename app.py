@@ -32,6 +32,8 @@ try:
 except:
     cursor = conn.cursor()
 
+query = "SELECT * from chatbot_log where id >= 10"
+cursor.execute(query)
 rows = cursor.fetchall()
 
 #Define functions
@@ -126,7 +128,9 @@ def chatbot_response():
 
 @app.route("/get_rows")
 def get_rows():
-    query = "SELECT * from chatbot_log where id >= 10"
+    """
+    query = "SELECT * from chatbot_log"
+    """
     cursor.execute(query)
     rows = cursor.fetchall()
     return jsonify(rows)
