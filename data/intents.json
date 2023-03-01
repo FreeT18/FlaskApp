@@ -17,14 +17,6 @@
      "patterns": ["Who are you?", "What are you?", "Who you are?" ],
      "responses": ["I'm an assistant to help answer your questions."]
     },
-    {"tag": "age",
-    "patterns": ["How old are you", "What is your age", "Age", "old"],
-    "responses": ["I have been serving for two years.", "I am very young.", "I am 25."]
-    },
-    {"tag": "name",
-    "patterns": ["what is your name", "what should I call you", "whats your name?"],
-    "responses": ["You can call me Jackie.", "I'm Jackie!", "My name is Jackie"]
-    },
     {"tag": "help",
     "patterns": ["Could you help me?", "give me a hand please", "Can you help?", "What can you do for me?", "I need support", "I need a help", "support me please"],
     "responses": ["Tell me how I can assist you", "Sure, what do you need help with?"]
@@ -42,11 +34,11 @@
     "responses": ["There are options for large or small companies. Which do you prefer?."]
     },
     {"tag": "target",
-    "patterns": ["I am targeting large companies.", "I am targeting companies", "Large companies", "large"],
+    "patterns": ["I am targeting large companies.", "I am targeting companies", "Large companies", "businesses", "government"],
     "responses": ["Our Lockdown selection is your best option."]
     },
     {"tag": "target2",
-    "patterns": ["I am targeting individuals.", "I am targeting small companies", "small", "individuals"],
+    "patterns": ["I am targeting individuals.", "I am targeting small companies", "small", "individuals","people"],
     "responses": ["Our Hive selection is your best option."]
     }
 ]
