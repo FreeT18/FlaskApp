@@ -101,7 +101,23 @@ def close_connection(exception):
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html", rows=rows)
+    return render_template("index.html")
+
+@app.route("/producth")
+def producth():
+    return render_template("producth.html")
+
+@app.route("/productu")
+def productu():
+    return render_template("productu.html")
+
+@app.route("/productx")
+def productx():
+    return render_template("productx.html")
+
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.html")
 
 @app.route("/get", methods=["POST"])
 def chatbot_response():

@@ -50,7 +50,7 @@
                                 <li class="nav-item"><a class="nav-item-child nav-item-hover active" href="{{ url_for('home') }}">Home</a></li>
                                 <li class="nav-item"><a class="nav-item-child nav-item-hover" href="{{ url_for('home') }}">Pricing</a></li>
                                 <li class="nav-item"><a class="nav-item-child nav-item-hover" href="{{ url_for('home') }}">About</a></li>
-                                <li class="nav-item"><a class="nav-item-child nav-item-hover" href="{{ url_for('home') }}">Products</a></li>
+                                <li class="nav-item"><a class="nav-item-child nav-item-hover" href="#products">Products</a></li>
                                 <li class="nav-item"><a class="nav-item-child nav-item-hover" href="{{ url_for('home') }}">FAQ</a></li>
                             </ul>
                         </div>
@@ -62,16 +62,14 @@
         </header>
 <!--========== END HEADER ==========-->
         <!--========== SLIDER ==========-->
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+ <!--       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <div class="container">
-                <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                 </ol>
             </div>
   
-            <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
                     <img class="img-responsive" src="{{ url_for('static', filename='images/1920x1080/01.jpg')}}" alt="Slider Image">
@@ -99,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!--========== SLIDER ==========-->
 <!--- Content Section-->
 {% block content %}
@@ -114,7 +112,37 @@
 <a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
 
 <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<script>
+    $(document).ready(function() {
+        $("form").on("submit", function(event) {
+            var rawText = $("#text").val();
+            var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+            $("#text").val("");
+            $("#chatbox").append(userHtml);
+            document.getElementById("userInput").scrollIntoView({
+                block: "start",
+                behavior: "auto",
+            });
+            $.ajax({
+                data: {
+                    msg: rawText,
+                },
+                type: "POST",
+                url: "/get",
+            }).done(function(data) {
+                var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                $("#chatbox").append($.parseHTML(botHtml));
+                document.getElementById("userInput").scrollIntoView({
+                    block: "start",
+                    behavior: "auto",
+                });
+            });
+            event.preventDefault();
+        });
+    });
+  </script>
 <!-- CORE PLUGINS -->
+<script src="{{ url_for('static', filename='js/layout.js')}}"></script>
 <script src="{{ url_for('static', filename='vendor/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='vendor/jquery-migrate.min.js')}}" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>

@@ -72,6 +72,15 @@ var Layout = function () {
        });
     }
 
+    // handle add to cart button
+    document.querySelectorAll('.button').forEach(button => button.addEventListener('click', e => {
+        if(!button.classList.contains('loading')) {
+        button.classList.add('loading');
+        setTimeout(() => button.classList.remove('loading'), 3700);
+        }
+        e.preventDefault();
+        }));
+
     return {
         init: function () {
             handleHeaderOnScroll(); // initial setup for fixed header

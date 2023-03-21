@@ -19,7 +19,7 @@ Darknet Home
         </div>--->
 
 <!-- Latest Products -->    
-      <div class="content-lg container">
+      <div class="content-lg container" style="padding-top:100px">
           <div class="row margin-b-40">
               <div class="col-sm-6">
                   <h2>Latest Products</h2>
@@ -30,15 +30,15 @@ Darknet Home
 
           <div class="row">
               <!-- Latest Products -->
-              <div class="col-sm-4 sm-margin-b-50">
+              <div class="col-sm-4 sm-margin-b-50" id="products">
                   <div class="margin-b-20">
                       <div class="wow zoomIn" data-wow-duration=".3" data-wow-delay=".1s">
                           <img class="img" src="{{ url_for('static', filename='images/p1.jpg')}}" alt="Latest Products Image">
                       </div>
                   </div>
-                  <h4><a href="#">Hive</a> <span class="text-uppercase margin-l-20">Uncover</span></h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                  <a class="link" href="#">Discover More...</a>
+                  <h4><a href="{{ url_for('producth') }}">Hive</a> <span class="text-uppercase margin-l-20">Uncover</span></h4>
+                  <p>Click the link for more information</p>
+                  <a class="link" href="{{ url_for('producth') }}">Discover More...</a>
               </div>
               <!-- End Latest Products -->
 
@@ -49,9 +49,9 @@ Darknet Home
                           <img class="img" src="{{ url_for('static', filename='images/p3.jpg')}}" alt="Latest Products Image">
                       </div>
                   </div>
-                  <h4><a href="#">Lockdown</a> <span class="text-uppercase margin-l-20">Recover</span></h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                  <a class="link" href="#">Discover More...</a>
+                  <h4><a href="{{ url_for('productx') }}">Lockdown</a> <span class="text-uppercase margin-l-20">Recover</span></h4>
+                  <p>Click the link for more information</p>
+                  <a class="link" href="{{ url_for('productx') }}">Discover More...</a>
               </div>
               <!-- End Latest Products -->
 
@@ -62,9 +62,9 @@ Darknet Home
                           <img class="img" src="{{ url_for('static', filename='images/p4.jpg')}}" alt="Latest Products Image">
                       </div>
                   </div>
-                  <h4><a href="#">Wormware</a> <span class="text-uppercase margin-l-20">Deploy</span></h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                  <a class="link" href="#">Discover More...</a>
+                  <h4><a href="{{ url_for('productu') }}">Wormware</a> <span class="text-uppercase margin-l-20">Deploy</span></h4>
+                  <p>Click the link for more information</p>
+                  <a class="link" href="{{ url_for('productu') }}">Discover More...</a>
               </div>
               <!-- End Latest Products -->
           </div>
@@ -223,26 +223,6 @@ Darknet Home
       </div>
       <!-- End Work -->
 
-<!---Chatbot-->
-<div class="content-lg container">
-    <h1 class="header">Need Help?</h1>
-      <form>
-        <div id="chatbox">
-          <div class="col-md-8 ml-auto mr-auto">
-            <p class="botText"><span>Hi! Ask me anything.</span></p>
-          </div>
-        </div>
-        <div id="userInput" class="row">
-          <div class="col-md-10">
-            <input id="text" type="text" name="msg" placeholder="Type your message here..." class="form-control">
-            <button type="submit" id="send" class="btn btn-warning">
-            Send</button>
-            </div>
-          </div>
-        </div>
-      </form>
-</div>
-<!---End Chatbot-->
 <!-- 
 <div class ="content-lg container">
     <button id="chatlog" onclick="getrows()">Get Rows</button>
@@ -271,35 +251,7 @@ Darknet Home
 <!--========== END PAGE LAYOUT ==========-->
 
   
-<script>
-  $(document).ready(function() {
-      $("form").on("submit", function(event) {
-          var rawText = $("#text").val();
-          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
-          $("#text").val("");
-          $("#chatbox").append(userHtml);
-          document.getElementById("userInput").scrollIntoView({
-              block: "start",
-              behavior: "auto",
-          });
-          $.ajax({
-              data: {
-                  msg: rawText,
-              },
-              type: "POST",
-              url: "/get",
-          }).done(function(data) {
-              var botHtml = '<p class="botText"><span>' + data + "</span></p>";
-              $("#chatbox").append($.parseHTML(botHtml));
-              document.getElementById("userInput").scrollIntoView({
-                  block: "start",
-                  behavior: "auto",
-              });
-          });
-          event.preventDefault();
-      });
-  });
-</script>
+
 <script>
 function getRows() {
         fetch('/get_rows')
