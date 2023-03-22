@@ -1222,7 +1222,6 @@ fieldset[disabled] .btn-theme {
 .masonry-grid .masonry-grid-item {
   display: block;
   float: left;
-  vertical-align: top;
   padding: 0 2px;
   margin-bottom: 4px;
 }
