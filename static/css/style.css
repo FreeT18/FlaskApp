@@ -1546,6 +1546,7 @@ fieldset[disabled] .btn-theme {
 
 .margin-b-30 {
   margin-bottom: 30px !important;
+  display: flex;
   flex-direction: row-reverse;}
 
 .margin-b-40 {
