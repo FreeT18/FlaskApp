@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify, g
 import sqlite3
-import os
+#import os
+import openpyxl
+import pandas as pd
 import numpy as np
 import random
 import json
@@ -50,19 +52,16 @@ def clean_up(sentence):
 
 def bag_of_words(sentence, words, show_details=True):
     sentence_words = clean_up(sentence)
-    bag = [0] * len(words)
-    for s in sentence_words:
-        for i, w in enumerate(words):
-            if w == s:
-                bag[i] = 1
-                if show_details:
-                    print("found in bag: %s" % w)
+    bag = [1 if word in sentence_words else 0 for word in words]
+    if show_details:
+      found_words = [words[i] for i in range(len(words)) if bag[i] == 1]
+      print("found in bag: {}".format(', '.join(found_words)))
     return np.array(bag)
 
-def predict_class(sentence, model):
+def predict_class(sentence, model, ERROR_THRESHOLD=0.25):
     bow = bag_of_words(sentence, words, show_details=False)
     result = model.predict(np.array([bow]))[0]
-    ERROR_THRESHOLD = 0.25
+    #ERROR_THRESHOLD = 0.25
     results = [[i, r] for i, r in enumerate(result) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
@@ -122,12 +121,12 @@ def pricing():
 @app.route("/get", methods=["POST"])
 def chatbot_response():
     msg = request.form["msg"]
-    if msg.startswith('my name is'):
+    if msg.lower().startswith('my name is'):
         name = msg[11:]
         ints = predict_class(msg, model)
         res1 = get_response(ints, intents)
         response =res1.replace("{n}",name)
-    elif msg.startswith('hi my name is'):
+    elif msg.lower().startswith('hi my name is'):
         name = msg[14:]
         ints = predict_class(msg, model)
         res1 = get_response(ints, intents)
@@ -140,6 +139,17 @@ def chatbot_response():
     cursor.execute("INSERT INTO chatbot_log (msg, response, timestamp) VALUES (?, ?, ?)",
                    (msg, response, timestamp))
     conn.commit()
+    try:
+        chat_logs_df = pd.read_excel('chat_logs.xlsx')
+    except:
+        chat_logs_df = pd.DataFrame(columns=['Timestamp', 'User', 'Bot'])
+
+    new_row = [[timestamp,msg,response]]
+    new_row = pd.DataFrame(new_row, columns=['Timestamp','User', 'Bot'])
+    frames=[chat_logs_df,new_row]
+    chat_logs_df = pd.concat(frames)
+    #chat_logs_df = chat_logs_df.concat({'Timestamp': timestamp, 'User': msg, 'Bot': response}, ignore_index=True)
+    chat_logs_df.to_excel('chat_logs.xlsx', index=False)
     return response
 
 @app.route("/get_rows")
