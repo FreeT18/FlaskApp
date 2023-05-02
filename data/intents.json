@@ -1,45 +1,279 @@
-{"intents": [
-    {"tag": "greeting",
-     "patterns": ["Hi", "Hey", "Is anyone there?", "Hello", "Hay", "Good morning", 
-        "Good afternoon"],
-     "responses": [ "Hello! How can I help you today?",
-     "Hi there! What can I do for you?"]
-    },
-    {"tag": "goodbye",
-     "patterns": ["Bye", "See you later", "Goodbye"],
-     "responses": ["See you later", "Have a nice day", "Bye! Come back again"]
-    },
-    {"tag": "thanks",
-     "patterns": ["Thanks", "Thank you", "That's helpful", "Thanks for the help"],
-     "responses": ["Happy to help!", "Any time!", "My pleasure", "You're most welcome!"]
-    },
-    {"tag": "about",
-     "patterns": ["Who are you?", "What are you?", "Who you are?" ],
-     "responses": ["I'm an assistant to help answer your questions."]
-    },
-    {"tag": "help",
-    "patterns": ["Could you help me?", "give me a hand please", "Can you help?", "What can you do for me?", "I need support", "I need a help", "support me please"],
-    "responses": ["Tell me how I can assist you", "Sure, what do you need help with?"]
-    },
-    {"tag": "noanswer",
-    "patterns": [],
-    "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"]
-   },
-    {"tag": "choice",
-    "patterns": ["Can you help me?", "What can you help with?"],
-    "responses": ["Are you looking for ransomware?"]
-    },
-    {"tag": "market",
-    "patterns": ["I am","yes","What ransomware do you have?", "looking for ransomware"],
-    "responses": ["There are options for large or small companies. Which do you prefer?."]
-    },
-    {"tag": "target",
-    "patterns": ["I am targeting large companies.", "I am targeting companies", "Large companies", "businesses", "government"],
-    "responses": ["Our Lockdown selection is your best option."]
-    },
-    {"tag": "target2",
-    "patterns": ["I am targeting individuals.", "I am targeting small companies", "small", "individuals","people"],
-    "responses": ["Our Hive selection is your best option."]
-    }
-]
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "Hello",
+                "Hello there!",
+                "How are you?",
+                "Is anyone there?",
+                "Howdy",
+                "Good morning",
+                "Salutations",
+                "Hay",
+                "Good afternoon",
+                "Hey there!",
+                "What's popping?",
+                "Greetings",
+                "Hi there!",
+                "Hey",
+                "Good evening",
+                "What's up?"
+            ],
+            "responses": [
+                "Good afternoon! How can I assist you?",
+                "Good evening! How can I help you?",
+                "Good morning! How can I help you today?",
+                "I'm doing great, thanks for asking! How can I assist you?",
+                "Howdy! How can I help you today?",
+                "Greetings! How may I assist you?",
+                "Hey! How can I assist you?",
+                "Hi there! What can I do for you?",
+                "Hello! How can I help you today?"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "Have a nice day",
+                "See you later",
+                "Take care",
+                "See you soon",
+                "Adios",
+                "Talk to you soon",
+                "Have a good one",
+                "Catch you later",
+                "Goodbye",
+                "Bye"
+            ],
+            "responses": [
+                "Bye! Come back again",
+                "Have a nice day",
+                "See you later! Take care.",
+                "Goodbye! Have a great day!",
+                "See you later",
+                "Goodbye! Don't hesitate to reach out if you need assistance.",
+                "It was nice chatting with you! Goodbye.",
+                "Until next time! Goodbye.",
+                "Take care, have a great day!",
+                "Adios! Have a great day.",
+                "Bye! Come back again soon.",
+                "Goodbye, it was nice chatting with you!",
+                "Take care! Goodbye."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "You're the best",
+                "Thank you very much",
+                "Thanks for the help",
+                "Thanks a lot",
+                "That's helpful",
+                "Thanks",
+                "I appreciate it",
+                "Thank you so much",
+                "I'm grateful",
+                "Thank you"
+            ],
+            "responses": [
+                "My pleasure!",
+                "Anytime!",
+                "Glad I could help!",
+                "My pleasure",
+                "Happy to help!",
+                "You're welcome!",
+                "No problem!",
+                "Glad to be of assistance!",
+                "I'm always here to help!",
+                "Any time!",
+                "It was my pleasure!",
+                "You're most welcome!",
+                "Don't hesitate to reach out if you need further assistance!"
+            ]
+        },
+        {
+            "tag": "about",
+            "patterns": [
+                "Who you are?",
+                "What are you?",
+                "What is your purpose?",
+                "What can you tell me about yourself?",
+                "Who are you?",
+                "What do you do?",
+                "Tell me about yourself"
+            ],
+            "responses": [
+                "I'm an AI chatbot designed to assist you with any questions or concerns you may have!",
+                "I'm an AI-powered chatbot created to provide you with assistance.",
+                "I'm an assistant to help answer your questions.",
+                "I'm a conversational agent designed to answer your questions.",
+                "I'm here to provide information and assistance.",
+                "I'm a chatbot designed to assist you.",
+                "I'm a chatbot designed to help answer your questions.",
+                "I'm an AI assistant here to help you!"
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": [
+                "I need some assistance",
+                "Can you help?",
+                "I'm having an issue",
+                "Could you help me?",
+                "I need support",
+                "support me please",
+                "give me a hand please",
+                "Can you assist me?",
+                "I need a help",
+                "What can you do for me?"
+            ],
+            "responses": [
+                "Sure, what do you need help with?",
+                "Tell me how I can assist you",
+                "What's the issue? I'm here to assist you.",
+                "Sure thing! What do you need assistance with?",
+                "Let me know what I can do to help.",
+                "Of course, tell me how I can assist you!",
+                "I'm here to help! What's the problem?"
+            ]
+        },
+        {
+            "tag": "noanswer",
+            "patterns": [
+                "Sorry, can't understand you",
+                "Please give me more info",
+                "Not sure I understand",
+                "I'm having trouble understanding your question",
+                "Can you rephrase that?",
+                "I didn't get that"
+            ],
+            "responses": [
+                "Sorry, can't understand you",
+                "Please give me more info",
+                "Not sure I understand",
+                "Could you please rephrase that?",
+                "I'm having trouble understanding. Could you please provide more details?",
+                "I'm sorry, could you please provide more information?",
+                "Could you please provide more context?",
+                "I'm not sure I understand. Could you please clarify?"
+            ]
+        },
+        {
+            "tag": "choice",
+            "patterns": [
+                "What can you help with?",
+                "Can you help me choose?",
+                "Can you help me?",
+                "Do you have any suggestions?",
+                "Which ransomware is right for me?",
+                "What is the difference between your products?",
+                "Which one is better?",
+                "Can you recommend something?",
+                "I'm not sure which one to choose.",
+                "What do you recommend?",
+                "Can you help me decide which ransomware to choose?",
+                "What are my options?",
+                "Can you recommend a ransomware solution for me?",
+                "Which one offers the best protection?",
+                "What should I choose?"
+            ],
+            "responses": [
+                "Our ransomware solutions vary in their features and capabilities. Lockdown is our most comprehensive solution, offering advanced threat detection and response capabilities. Hive is designed for smaller organizations and includes basic security features. Beacon is a cloud-based solution that provides real-time threat monitoring and alerts. Which one are you interested in learning more about?",
+                "It's hard to say without more information about your specific needs. Could you please provide more details?",
+                "Are you looking for ransomware?",
+                "I would be happy to make a recommendation, but I need more information about what you're looking for.",
+                "Our ransomware solutions are designed to provide comprehensive protection against cyber threats. Depending on your organization's needs, we may recommend Lockdown for larger organizations, Hive for smaller businesses, or Beacon for cloud-based threat monitoring. Would you like me to provide you with more information about these solutions?",
+                "It depends on your specific needs. Could you please provide more information about what you're looking for?",
+                "We offer a range of ransomware solutions to meet the unique needs of your organization. Some of our most popular options include Lockdown, Hive, and Beacon. Would you like me to provide you with more information about these solutions?",
+                "Choosing the right ransomware solution depends on a number of factors, including the size of your organization, your security needs, and your budget. I can help you narrow down your options and choose the solution that is right for you. Would you like me to provide you with more information about our products?"
+            ]
+        },
+        {
+            "tag": "market",
+            "patterns": [
+                "Do you offer any discounts?",
+                "What are the features of your small business plan?",
+                "Can you tell me more about your enterprise plan?",
+                "I am",
+                "looking for ransomware",
+                "yes",
+                "I'm interested in your ransomware solutions.",
+                "What are your pricing options?",
+                "What ransomware do you have?"
+            ],
+            "responses": [
+                "Yes, we offer discounts to non-profit organizations and educational institutions. Would you like to learn more about our discount programs?",
+                "Our pricing options vary depending on the size of your organization and the features you need. Would you like me to provide you with more information?",
+                "Our ransomware solutions are designed to protect organizations of all sizes from cyber threats. Would you like me to provide you with more information?",
+                "There are options for large or small companies. Which do you prefer?.",
+                "Our small business plan includes basic security features, access to our support team, and 24/7 monitoring. Would you like to learn more?",
+                "Our enterprise plan includes advanced security features, priority support, and access to our threat intelligence network. Would you like to learn more?"
+            ]
+        },
+        {
+            "tag": "target",
+            "patterns": [
+                "individuals",
+                "enterprise",
+                "I am targeting large companies.",
+                "I'm targeting companies",
+                "I am targeting companies",
+                "I'm targeting small companies",
+                "I'm targeting large companies.",
+                "people",
+                "Large companies",
+                "small",
+                "businesses",
+                "government"
+            ],
+            "responses": [
+                "Our ransomware solutions are designed to protect organizations of all sizes from cyber threats. Would you like me to provide you with more information?",
+                "Our Lockdown selection is your best option.', 'Our enterprise plan offers advanced security features specifically designed for large organizations.",
+                "Our ransomware solutions are highly effective for businesses and government organizations.",
+                "Our Lockdown selection is your best option."
+            ]
+        },
+        {
+            "tag": "target2",
+            "patterns": [
+                "individuals",
+                "I am targeting small companies",
+                "I am targeting individuals.",
+                "home users",
+                "people",
+                "small"
+            ],
+            "responses": [
+                "Our Hive selection is your best option.",
+                "Our ransomware solutions are highly effective for individuals and small organizations.",
+                "Our ransomware solutions are designed to protect organizations of all sizes from cyber threats. Would you like me to provide you with more information?",
+                "Our small business plan offers basic security features that are highly effective for small organizations and home users."
+            ]
+        },
+        {
+            "tag": "product",
+            "patterns": [
+                "Which of your ransomware solutions is the most popular?",
+                "Can you tell me more about your ransomware features?",
+                "Do you offer any trials for your ransomware solutions?",
+                "What kind of ransomware solutions do you offer?",
+                "Can you give me a rundown of your ransomware products?",
+                "Tell me about your ransomware products.",
+                "What makes your ransomware different?",
+                "Do you offer any free ransomware solutions?"
+            ],
+            "responses": [
+                "We offer a free trial of our ransomware solutions so you can try them out before you buy. Would you like me to provide you with more information?",
+                "Our ransomware features include real-time threat monitoring, advanced malware detection, and automated response capabilities. Would you like me to provide you with more information?",
+                "Sure, we offer a range of ransomware products to meet the needs of different organizations. Our most popular solutions include Lockdown and Hive. Would you like me to provide you with more information?",
+                "We do not offer any free ransomware solutions at this time, but we do offer a variety of pricing options to meet your specific needs. Would you like me to provide you with more information?",
+                "Our ransomware solutions are designed to provide comprehensive protection against cyber threats, including malware, phishing attacks, and more. Would you like me to provide you with more information?",
+                "Our ransomware products are designed to protect organizations of all sizes from cyber threats. We offer a variety of solutions to meet your specific needs. Would you like me to provide you with more information?",
+                "Our Lockdown solution is the most popular, but we have a variety of solutions to meet your specific needs. Would you like me to provide you with more information?",
+                "Our ransomware is different because it is constantly updated to stay ahead of the latest threats. Would you like me to provide you with more information?"
+            ]
+        }
+    ]
 }
