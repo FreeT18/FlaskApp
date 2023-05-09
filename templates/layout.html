@@ -67,7 +67,23 @@
    
 {% endblock %}
 
-
+<!---Chatbot-->
+<div class="row">
+    <div class="chat-bubble">
+        <form>
+            <div id="chatbox">
+                <p class="botText"><span>Get support.</span></p>
+              </div>
+            <div id="userInput" class="row">
+              <div class="col-md-10">
+                <input id="text" type="text" name="msg" placeholder="Type your message here..." class="form-control">
+                <button type="submit" id="send" class="btn btn-warning">
+                Send</button>
+                </div>
+              </div>
+          </form>
+    </div>
+    </div>
 <!-- FOOTER SECTION -->
 {% include 'footer.html' %}
 
