@@ -76,6 +76,9 @@ def get_response(ints, intents_json):
         if intent['tag'] == tag:
             response = random.choice(intent['responses'])
             break
+        """elif intent['tag'] != tag:
+            response = "Can you please clarify your question?"
+            break"""
     return response
 
 def get_db():
@@ -124,13 +127,14 @@ def chatbot_response():
     if msg.lower().startswith('my name is'):
         name = msg[11:]
         ints = predict_class(msg, model)
-        res1 = get_response(ints, intents)
-        response =res1.replace("{n}",name)
+        #res1 = get_response(ints, intents)
+        response = "Hello " + name.title() + ". How can I help you?"
     elif msg.lower().startswith('hi my name is'):
         name = msg[14:]
         ints = predict_class(msg, model)
         res1 = get_response(ints, intents)
-        response =res1.replace("{n}",name)
+        #response =res1.replace("{n}",name)
+        response = "Hello " + name.title() + ". How can I help you?"
     else:
         ints = predict_class(msg, model)
         response = get_response(ints, intents)
@@ -148,7 +152,6 @@ def chatbot_response():
     new_row = pd.DataFrame(new_row, columns=['Timestamp','User', 'Bot'])
     frames=[chat_logs_df,new_row]
     chat_logs_df = pd.concat(frames)
-    #chat_logs_df = chat_logs_df.concat({'Timestamp': timestamp, 'User': msg, 'Bot': response}, ignore_index=True)
     chat_logs_df.to_excel('chat_logs.xlsx', index=False)
     return response
 
