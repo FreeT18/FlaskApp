@@ -61,7 +61,6 @@ def bag_of_words(sentence, words, show_details=True):
 def predict_class(sentence, model, ERROR_THRESHOLD=0.25):
     bow = bag_of_words(sentence, words, show_details=False)
     result = model.predict(np.array([bow]))[0]
-    #ERROR_THRESHOLD = 0.25
     results = [[i, r] for i, r in enumerate(result) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
@@ -76,9 +75,9 @@ def get_response(ints, intents_json):
         if intent['tag'] == tag:
             response = random.choice(intent['responses'])
             break
-        """elif intent['tag'] != tag:
+        elif intent['tag'] == 'noanswer':
             response = "Can you please clarify your question?"
-            break"""
+            break
     return response
 
 def get_db():
