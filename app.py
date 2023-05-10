@@ -75,9 +75,9 @@ def get_response(ints, intents_json):
         if intent['tag'] == tag:
             response = random.choice(intent['responses'])
             break
-        elif intent['tag'] == 'noanswer':
+        """elif intent['tag'] != tag:
             response = "Can you please clarify your question?"
-            break
+            break"""
     return response
 
 def get_db():
